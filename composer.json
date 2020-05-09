@@ -1,0 +1,5 @@
+{
+    "require": {
+        "arweave/arweave-sdk": "^0.4.0"
+    }
+}
