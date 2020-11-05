@@ -26,9 +26,9 @@ cp <wallet_source_location> jwk.json
 
 ## Use
 
-- Set the block height to start at
+- Set the block height to start at it MUST be a number the example below starts at block 10
 ```
-echo <starting_block_height> > blocks.txt
+echo 10 > blocks.txt
 ```
 
 - Add the script to cron the example below is every 10 minutes **source** [Crontab Guru](https://crontab.guru/every-10-minutes)
