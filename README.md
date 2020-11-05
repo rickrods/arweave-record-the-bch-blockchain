@@ -1,4 +1,6 @@
-# record-the-bch-blockchain
+# Record The BCH Blockchain
+
+- THis bot was created to fullfil bounty on gitcoin [Gitcoin bounty](https://gitcoin.co/issue/ArweaveTeam/Bounties/23/3996)
 
 ## Requirements
 
