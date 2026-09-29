@@ -1,6 +1,13 @@
 {
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/rickrods/arweave-php"
+        }
+    ],
     "require": {
-        "arweave/arweave-sdk": "^0.4.0",
-	"symfony/http-kernel": "6.4.16"
-    }
+        "arweave/arweave-sdk": "dev-modernization",
+        "symfony/http-kernel": "6.4.16"
+    },
+    "prefer-stable": true
 }
