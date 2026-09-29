@@ -45,3 +45,13 @@ crontab -e
 All data is saved here 
 
 https://viewblock.io/arweave/address/jN91f8NkkiP4X9isB00wkri_-M86Iv-1oK6gLyC4EVk
+
+
+## Update 9-29-26
+The original library arweave-php is unmaintained.
+
+I thought I would attempt to modernize the arweave-php library and see if I could resolve the security issues that have developed over the years. 
+
+I forked and modernized the arweave-php library [modernized version now located here](https://github.com/rickrods/arweave-php/tree/modernization) 
+
+I have not tested the updates as of today perhaps someday soon...
