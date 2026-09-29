@@ -18,59 +18,63 @@ use Symfony\Component\Cache\Marshaller\MarshallerInterface;
  */
 class MarshallingSessionHandler implements \SessionHandlerInterface, \SessionUpdateTimestampHandlerInterface
 {
-    private $handler;
-    private $marshaller;
-
-    public function __construct(AbstractSessionHandler $handler, MarshallerInterface $marshaller)
-    {
-        $this->handler = $handler;
-        $this->marshaller = $marshaller;
+    public function __construct(
+        private AbstractSessionHandler $handler,
+        private MarshallerInterface $marshaller,
+    ) {
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function open($savePath, $name)
+    public function __serialize(): array
+    {
+        throw new \BadMethodCallException('Cannot serialize '.__CLASS__);
+    }
+
+    public function __unserialize(array $data): void
+    {
+        throw new \BadMethodCallException('Cannot unserialize '.__CLASS__);
+    }
+
+    public function open(string $savePath, string $name): bool
     {
         return $this->handler->open($savePath, $name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function close()
+    public function close(): bool
     {
         return $this->handler->close();
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
-    public function destroy($sessionId)
+    public function create_sid()
+    {
+        return session_create_id() ?: throw new \RuntimeException('Unable to create a session ID.');
+    }
+
+    public function destroy(#[\SensitiveParameter] string $sessionId): bool
     {
         return $this->handler->destroy($sessionId);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function gc($maxlifetime)
+    public function gc(int $maxlifetime): int|false
     {
         return $this->handler->gc($maxlifetime);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function read($sessionId)
+    public function read(#[\SensitiveParameter] string $sessionId): string
     {
-        return $this->marshaller->unmarshall($this->handler->read($sessionId));
+        $data = $this->handler->read($sessionId);
+
+        try {
+            return $this->marshaller->unmarshall($data);
+        } catch (\DomainException $e) {
+            // data that cannot be unmarshalled is treated as a missing session, as PHP does with data it cannot decode
+            return '';
+        }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function write($sessionId, $data)
+    public function write(#[\SensitiveParameter] string $sessionId, string $data): bool
     {
         $failed = [];
         $marshalledData = $this->marshaller->marshall(['data' => $data], $failed);
@@ -82,18 +86,12 @@ class MarshallingSessionHandler implements \SessionHandlerInterface, \SessionUpd
         return $this->handler->write($sessionId, $marshalledData['data']);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function validateId($sessionId)
+    public function validateId(#[\SensitiveParameter] string $sessionId): bool
     {
         return $this->handler->validateId($sessionId);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function updateTimestamp($sessionId, $data)
+    public function updateTimestamp(#[\SensitiveParameter] string $sessionId, string $data): bool
     {
         return $this->handler->updateTimestamp($sessionId, $data);
     }

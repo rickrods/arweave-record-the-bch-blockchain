@@ -18,7 +18,7 @@ Or add the following to your project `composer.json` file.
 ## Quick Examples
 
 
-#### Sending data to the network 
+#### Sending data to the network
 
 
 ```php
@@ -41,7 +41,7 @@ printf('Your transaction ID is %s', $transaction->getAttribute('id'));
 
 
 // commit() sends the transaction to the network, once sent this can't be undone.
-$arweave->commit($transaction);
+$arweave->api()->commit($transaction);
 ```
 
 #### Getting data from the network
@@ -149,7 +149,7 @@ To load a wallet you need a Key file. Arweave uses JSON Web Keys (JWK) as the ke
   "dq": "gk_Sb5cFAQQ...",
   "qi": "k65nfXdh4qx..."
 }
-``` 
+```
 
 We first need to decode our JWK file to a PHP array, then we can simply pass that array into a new `Wallet` object.
 
@@ -165,3 +165,36 @@ This is just one suggested method of storing your JWK but there's no requirement
 
 #### Creating a Transaction
 Transactions need to be signed for them to be accepted by the network, so **this step requires a wallet**.
+
+
+
+
+
+#### Modernizing the arweave-php library (ArweaveTeam/arweave-php) 
+To ensure that it uses updated dependencies, fixes security vulnerabilities, and supports PHP 8.x without altering the library's functionality or breaking code that consumes it (such as blocks.php).
+
+#### Key Findings & Bottlenecks in arweave-php
+1. Why web-token/jwt-framework was used initially: In arweave-php, the web-token/jwt-framework library was only imported for a single operation in Wallet.php and Transaction.php:
+
+php
+```
+// Converting a JSON Web Key (JWK) array into an RSA key object
+$private_key = RSAKey::createFromJWK(new JWK($jwk));
+$rsa->loadKey($private_key->toPEM());
+It was never used for JWT/JWS token processing.
+```
+
+2. The Problem with upgrading web-token/jwt-framework to 4.x: Major versions of web-token/jwt-framework (v3.x / v4.x / 4.1.7) refactored internal namespaces and removed Jose\Component\Core\Util\RSAKey.
+
+3. The Solution — Upgrading to phpseclib 3.x: phpseclib version 3.x (phpseclib/phpseclib: ^3.0) natively supports loading JWK keys directly via PublicKeyLoader::loadFormat('JWK', ...) and creating RSA-PSS signatures.
+By upgrading to phpseclib 3.x, you can eliminate web-token/jwt-framework entirely. Removing this unused dependency tree reduces attack surface, fixes security vulnerabilities, and resolves PHP 8 compatibility issues.
+
+#### Step 1: Update arweave-php/composer.json
+Update the dependency requirements in arweave-php to drop web-token and enforce phpseclib v3:
+
+#### Step 2: Refactor Arweave/SDK/Support/Wallet.php
+Update Wallet.php to use phpseclib3's native JWK loader and signature methods:
+
+#### Step 3: Refactor Arweave/SDK/Support/Transaction.php
+Update verify() in Transaction.php to verify signatures using phpseclib3
+

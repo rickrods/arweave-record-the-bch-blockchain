@@ -7,250 +7,108 @@ namespace Composer\Autoload;
 class ComposerStaticInit96b5513c0875b17d5b20863db1cf896b
 {
     public static $files = array (
-        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
-        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
-        '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
+        '606a39d89246991a373564698c2d8383' => __DIR__ . '/..' . '/symfony/polyfill-php85/bootstrap.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
-        '3109cb1a231dcd04bee1f9f620d46975' => __DIR__ . '/..' . '/paragonie/sodium_compat/autoload.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
-        'p' => 
+        'p' =>
         array (
-            'phpseclib\\' => 10,
+            'phpseclib3\\' => 11,
         ),
-        'S' => 
+        'S' =>
         array (
-            'Symfony\\Polyfill\\Php80\\' => 23,
-            'Symfony\\Polyfill\\Php73\\' => 23,
+            'Symfony\\Polyfill\\Php85\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
-            'Symfony\\Contracts\\Service\\' => 26,
-            'Symfony\\Contracts\\HttpClient\\' => 29,
             'Symfony\\Contracts\\EventDispatcher\\' => 34,
-            'Symfony\\Contracts\\Cache\\' => 24,
-            'Symfony\\Component\\VarExporter\\' => 30,
             'Symfony\\Component\\VarDumper\\' => 28,
-            'Symfony\\Component\\Routing\\' => 26,
             'Symfony\\Component\\HttpKernel\\' => 29,
             'Symfony\\Component\\HttpFoundation\\' => 33,
-            'Symfony\\Component\\Finder\\' => 25,
-            'Symfony\\Component\\Filesystem\\' => 29,
             'Symfony\\Component\\EventDispatcher\\' => 34,
             'Symfony\\Component\\ErrorHandler\\' => 31,
-            'Symfony\\Component\\DependencyInjection\\' => 38,
-            'Symfony\\Component\\Debug\\' => 24,
-            'Symfony\\Component\\Console\\' => 26,
-            'Symfony\\Component\\Config\\' => 25,
-            'Symfony\\Component\\Cache\\' => 24,
-            'Symfony\\Bundle\\FrameworkBundle\\' => 31,
         ),
-        'P' => 
+        'P' =>
         array (
             'Psr\\Log\\' => 8,
-            'Psr\\Container\\' => 14,
-            'Psr\\Cache\\' => 10,
+            'Psr\\EventDispatcher\\' => 20,
+            'ParagonIE\\ConstantTime\\' => 23,
         ),
-        'J' => 
-        array (
-            'Jose\\Tests\\' => 11,
-            'Jose\\Component\\Signature\\Algorithm\\' => 35,
-            'Jose\\Component\\Encryption\\Algorithm\\KeyEncryption\\' => 50,
-            'Jose\\Component\\Encryption\\Algorithm\\ContentEncryption\\' => 54,
-            'Jose\\Component\\Encryption\\Algorithm\\' => 36,
-            'Jose\\Component\\Core\\Util\\Ecc\\' => 29,
-            'Jose\\' => 5,
-        ),
-        'F' => 
-        array (
-            'FG\\' => 3,
-        ),
-        'B' => 
-        array (
-            'Base64Url\\' => 10,
-        ),
-        'A' => 
+        'A' =>
         array (
             'Arweave\\SDK\\' => 12,
-            'AESKW\\' => 6,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'phpseclib\\' => 
+        'phpseclib3\\' =>
         array (
             0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
         ),
-        'Symfony\\Polyfill\\Php80\\' => 
+        'Symfony\\Polyfill\\Php85\\' =>
         array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php85',
         ),
-        'Symfony\\Polyfill\\Php73\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-php73',
-        ),
-        'Symfony\\Polyfill\\Mbstring\\' => 
+        'Symfony\\Polyfill\\Mbstring\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
-        'Symfony\\Polyfill\\Ctype\\' => 
+        'Symfony\\Polyfill\\Ctype\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
-        'Symfony\\Contracts\\Service\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/service-contracts',
-        ),
-        'Symfony\\Contracts\\HttpClient\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/http-client-contracts',
-        ),
-        'Symfony\\Contracts\\EventDispatcher\\' => 
+        'Symfony\\Contracts\\EventDispatcher\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/event-dispatcher-contracts',
         ),
-        'Symfony\\Contracts\\Cache\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/cache-contracts',
-        ),
-        'Symfony\\Component\\VarExporter\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/var-exporter',
-        ),
-        'Symfony\\Component\\VarDumper\\' => 
+        'Symfony\\Component\\VarDumper\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/var-dumper',
         ),
-        'Symfony\\Component\\Routing\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/routing',
-        ),
-        'Symfony\\Component\\HttpKernel\\' => 
+        'Symfony\\Component\\HttpKernel\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/http-kernel',
         ),
-        'Symfony\\Component\\HttpFoundation\\' => 
+        'Symfony\\Component\\HttpFoundation\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/http-foundation',
         ),
-        'Symfony\\Component\\Finder\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/finder',
-        ),
-        'Symfony\\Component\\Filesystem\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/filesystem',
-        ),
-        'Symfony\\Component\\EventDispatcher\\' => 
+        'Symfony\\Component\\EventDispatcher\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/event-dispatcher',
         ),
-        'Symfony\\Component\\ErrorHandler\\' => 
+        'Symfony\\Component\\ErrorHandler\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/error-handler',
         ),
-        'Symfony\\Component\\DependencyInjection\\' => 
+        'Psr\\Log\\' =>
         array (
-            0 => __DIR__ . '/..' . '/symfony/dependency-injection',
+            0 => __DIR__ . '/..' . '/psr/log/src',
         ),
-        'Symfony\\Component\\Debug\\' => 
+        'Psr\\EventDispatcher\\' =>
         array (
-            0 => __DIR__ . '/..' . '/symfony/debug',
+            0 => __DIR__ . '/..' . '/psr/event-dispatcher/src',
         ),
-        'Symfony\\Component\\Console\\' => 
+        'ParagonIE\\ConstantTime\\' =>
         array (
-            0 => __DIR__ . '/..' . '/symfony/console',
+            0 => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src',
         ),
-        'Symfony\\Component\\Config\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/config',
-        ),
-        'Symfony\\Component\\Cache\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/cache',
-        ),
-        'Symfony\\Bundle\\FrameworkBundle\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/framework-bundle',
-        ),
-        'Psr\\Log\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
-        ),
-        'Psr\\Container\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/container/src',
-        ),
-        'Psr\\Cache\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/cache/src',
-        ),
-        'Jose\\Tests\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/web-token/jwt-framework/tests',
-        ),
-        'Jose\\Component\\Signature\\Algorithm\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/web-token/jwt-framework/src/SignatureAlgorithm/ECDSA',
-            1 => __DIR__ . '/..' . '/web-token/jwt-framework/src/SignatureAlgorithm/EdDSA',
-            2 => __DIR__ . '/..' . '/web-token/jwt-framework/src/SignatureAlgorithm/HMAC',
-            3 => __DIR__ . '/..' . '/web-token/jwt-framework/src/SignatureAlgorithm/None',
-            4 => __DIR__ . '/..' . '/web-token/jwt-framework/src/SignatureAlgorithm/RSA',
-            5 => __DIR__ . '/..' . '/web-token/jwt-framework/src/SignatureAlgorithm/Experimental',
-        ),
-        'Jose\\Component\\Encryption\\Algorithm\\KeyEncryption\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/web-token/jwt-framework/src/EncryptionAlgorithm/KeyEncryption/AESGCMKW',
-            1 => __DIR__ . '/..' . '/web-token/jwt-framework/src/EncryptionAlgorithm/KeyEncryption/AESKW',
-            2 => __DIR__ . '/..' . '/web-token/jwt-framework/src/EncryptionAlgorithm/KeyEncryption/Direct',
-            3 => __DIR__ . '/..' . '/web-token/jwt-framework/src/EncryptionAlgorithm/KeyEncryption/ECDHES',
-            4 => __DIR__ . '/..' . '/web-token/jwt-framework/src/EncryptionAlgorithm/KeyEncryption/PBES2',
-            5 => __DIR__ . '/..' . '/web-token/jwt-framework/src/EncryptionAlgorithm/KeyEncryption/RSA',
-        ),
-        'Jose\\Component\\Encryption\\Algorithm\\ContentEncryption\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/web-token/jwt-framework/src/EncryptionAlgorithm/ContentEncryption/AESGCM',
-            1 => __DIR__ . '/..' . '/web-token/jwt-framework/src/EncryptionAlgorithm/ContentEncryption/AESCBC',
-        ),
-        'Jose\\Component\\Encryption\\Algorithm\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/web-token/jwt-framework/src/EncryptionAlgorithm/Experimental',
-        ),
-        'Jose\\Component\\Core\\Util\\Ecc\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/web-token/jwt-framework/src/Ecc',
-        ),
-        'Jose\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/web-token/jwt-framework/src',
-        ),
-        'FG\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/fgrosse/phpasn1/lib',
-        ),
-        'Base64Url\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/spomky-labs/base64url/src',
-        ),
-        'Arweave\\SDK\\' => 
+        'Arweave\\SDK\\' =>
         array (
             0 => __DIR__ . '/..' . '/arweave/arweave-sdk/Arweave/SDK',
-        ),
-        'AESKW\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/spomky-labs/aes-key-wrap/src',
         ),
     );
 
     public static $classMap = array (
-        'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
-        'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
-        'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
-        'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
-        'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'DelayedTargetValidation' => __DIR__ . '/..' . '/symfony/polyfill-php85/Resources/stubs/DelayedTargetValidation.php',
+        'Filter\\FilterException' => __DIR__ . '/..' . '/symfony/polyfill-php85/Resources/stubs/Filter/FilterException.php',
+        'Filter\\FilterFailedException' => __DIR__ . '/..' . '/symfony/polyfill-php85/Resources/stubs/Filter/FilterFailedException.php',
+        'NoDiscard' => __DIR__ . '/..' . '/symfony/polyfill-php85/Resources/stubs/NoDiscard.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

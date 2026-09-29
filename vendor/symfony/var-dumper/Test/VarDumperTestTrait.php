@@ -11,6 +11,7 @@
 
 namespace Symfony\Component\VarDumper\Test;
 
+use PHPUnit\Framework\Attributes\After;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
 use Symfony\Component\VarDumper\Dumper\CliDumper;
 
@@ -22,12 +23,15 @@ trait VarDumperTestTrait
     /**
      * @internal
      */
-    private $varDumperConfig = [
+    private array $varDumperConfig = [
         'casters' => [],
         'flags' => null,
     ];
 
-    protected function setUpVarDumper(array $casters, int $flags = null): void
+    /**
+     * @param array<string, callable> $casters
+     */
+    protected function setUpVarDumper(array $casters, ?int $flags = null): void
     {
         $this->varDumperConfig['casters'] = $casters;
         $this->varDumperConfig['flags'] = $flags;
@@ -36,23 +40,24 @@ trait VarDumperTestTrait
     /**
      * @after
      */
+    #[After]
     protected function tearDownVarDumper(): void
     {
         $this->varDumperConfig['casters'] = [];
         $this->varDumperConfig['flags'] = null;
     }
 
-    public function assertDumpEquals($expected, $data, int $filter = 0, string $message = '')
+    public function assertDumpEquals(mixed $expected, mixed $data, int $filter = 0, string $message = ''): void
     {
         $this->assertSame($this->prepareExpectation($expected, $filter), $this->getDump($data, null, $filter), $message);
     }
 
-    public function assertDumpMatchesFormat($expected, $data, int $filter = 0, string $message = '')
+    public function assertDumpMatchesFormat(mixed $expected, mixed $data, int $filter = 0, string $message = ''): void
     {
         $this->assertStringMatchesFormat($this->prepareExpectation($expected, $filter), $this->getDump($data, null, $filter), $message);
     }
 
-    protected function getDump($data, $key = null, int $filter = 0): ?string
+    protected function getDump(mixed $data, string|int|null $key = null, int $filter = 0): ?string
     {
         if (null === $flags = $this->varDumperConfig['flags']) {
             $flags = getenv('DUMP_LIGHT_ARRAY') ? CliDumper::DUMP_LIGHT_ARRAY : 0;
@@ -73,7 +78,7 @@ trait VarDumperTestTrait
         return rtrim($dumper->dump($data, true));
     }
 
-    private function prepareExpectation($expected, int $filter): string
+    private function prepareExpectation(mixed $expected, int $filter): string
     {
         if (!\is_string($expected)) {
             $expected = $this->getDump($expected, null, $filter);

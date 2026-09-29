@@ -12,6 +12,7 @@
 namespace Symfony\Component\VarDumper\Server;
 
 use Psr\Log\LoggerInterface;
+use Symfony\Component\VarDumper\Caster\ClassDumpStub;
 use Symfony\Component\VarDumper\Cloner\Data;
 use Symfony\Component\VarDumper\Cloner\Stub;
 
@@ -24,27 +25,34 @@ use Symfony\Component\VarDumper\Cloner\Stub;
  */
 class DumpServer
 {
-    private $host;
-    private $socket;
-    private $logger;
+    private string $host;
 
-    public function __construct(string $host, LoggerInterface $logger = null)
-    {
-        if (false === strpos($host, '://')) {
+    /**
+     * @var resource|null
+     */
+    private $socket;
+
+    public function __construct(
+        string $host,
+        private ?LoggerInterface $logger = null,
+    ) {
+        if (!str_contains($host, '://')) {
             $host = 'tcp://'.$host;
         }
 
         $this->host = $host;
-        $this->logger = $logger;
     }
 
     public function start(): void
     {
         if (!$this->socket = stream_socket_server($this->host, $errno, $errstr)) {
-            throw new \RuntimeException(sprintf('Server start failed on "%s": ', $this->host).$errstr.' '.$errno);
+            throw new \RuntimeException(\sprintf('Server start failed on "%s": ', $this->host).$errstr.' '.$errno);
         }
     }
 
+    /**
+     * @param-immediately-invoked-callable $callback
+     */
     public function listen(callable $callback): void
     {
         if (null === $this->socket) {
@@ -52,30 +60,24 @@ class DumpServer
         }
 
         foreach ($this->getMessages() as $clientId => $message) {
-            if ($this->logger) {
-                $this->logger->info('Received a payload from client {clientId}', ['clientId' => $clientId]);
-            }
+            $this->logger?->info('Received a payload from client {clientId}', ['clientId' => $clientId]);
 
-            $payload = @unserialize(base64_decode($message), ['allowed_classes' => [Data::class, Stub::class]]);
+            $payload = @unserialize(base64_decode($message), ['allowed_classes' => [Data::class, Stub::class, ClassDumpStub::class]]);
 
             // Impossible to decode the message, give up.
             if (false === $payload) {
-                if ($this->logger) {
-                    $this->logger->warning('Unable to decode a message from {clientId} client.', ['clientId' => $clientId]);
-                }
+                $this->logger?->warning('Unable to decode a message from {clientId} client.', ['clientId' => $clientId]);
 
                 continue;
             }
 
             if (!\is_array($payload) || \count($payload) < 2 || !$payload[0] instanceof Data || !\is_array($payload[1])) {
-                if ($this->logger) {
-                    $this->logger->warning('Invalid payload from {clientId} client. Expected an array of two elements (Data $data, array $context)', ['clientId' => $clientId]);
-                }
+                $this->logger?->warning('Invalid payload from {clientId} client. Expected an array of two elements (Data $data, array $context)', ['clientId' => $clientId]);
 
                 continue;
             }
 
-            list($data, $context) = $payload;
+            [$data, $context] = $payload;
 
             $callback($data, $context, $clientId);
         }
